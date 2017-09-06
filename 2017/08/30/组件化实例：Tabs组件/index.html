@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.4 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            组件化实例：Tabs组件 | 
+        
+        Jlala
+    </title>
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+    
+    
+
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Jlala">
+    <meta name="description" content="jlala-blog,nodejs,react-native,react,小小的程序员">
+    <meta name="keywords" content="null">
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Jlala">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="组件化实例：Tabs组件 | Jlala">
+    <meta property="og:description" content="jlala-blog,nodejs,react-native,react,小小的程序员">
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS & jQuery -->
+    
+        <link rel="stylesheet" href="/css/material.min.css">
+        <link rel="stylesheet" href="/css/style.min.css">
+        <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/queue.js"></script>
+    
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                组件化实例：Tabs组件
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Jlala</strong>
+        <span>8月 30, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=组件化实例：Tabs组件&url=http://yoursite.com//2017/08/30/组件化实例：Tabs组件/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=组件化实例：Tabs组件&url=http://yoursite.com//2017/08/30/组件化实例：Tabs组件/index.html&via=Jlala" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/08/30/组件化实例：Tabs组件/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/08/30/组件化实例：Tabs组件/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div></pre></td><td class="code"><pre><div class="line">import React, &#123; Component, PropTypes, <span class="built_in">clone</span>Element &#125; from <span class="string">'react'</span>;</div><div class="line">import classname from <span class="string">'classnames'</span>;</div><div class="line">import style from <span class="string">'./tabs.scss'</span>;</div><div class="line"></div><div class="line">class Tabs extends Component &#123;</div><div class="line">	static propTypes = &#123;</div><div class="line">		// 在主节点上增加可选class</div><div class="line">		className: PropTypes.string,</div><div class="line">		// class 前缀</div><div class="line">		classPrefix: PropTypes.string,</div><div class="line">		children: PropTypes.oneOfType(&#123;</div><div class="line">			PropTypes.arrayOf(PropTypes.node).</div><div class="line">			PropTypes.node,</div><div class="line">		&#125;),</div><div class="line">		// 默认激活索引，组件内更新</div><div class="line">		defaultActiveIndex: PropTypes.number,</div><div class="line">		// 默认激活索引，组件外更新</div><div class="line">		activeIndex: PropTypes.number,</div><div class="line">		// 切换时回调函数</div><div class="line">		onChange: PropTypes.func,</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  static defaultProps = &#123;</div><div class="line">  	classPrefix: <span class="string">'tabs'</span>,</div><div class="line">  	onChange: () =&gt; &#123;&#125;,</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  constructor(props) &#123;</div><div class="line">  	super(props);</div><div class="line"></div><div class="line">  	// 对事件方法的绑定</div><div class="line">  	this.handleTabClick = this.handleTabClick.bind(this);</div><div class="line"></div><div class="line">  	const currProps = this.props;</div><div class="line"></div><div class="line">  	<span class="built_in">let</span> activeIndex;</div><div class="line">  	// 初始化 activeIndex state</div><div class="line">  	<span class="keyword">if</span> (<span class="string">'activeIndex'</span> <span class="keyword">in</span> currProps) &#123;</div><div class="line">  		activeIndex = currProps.activeIndex;</div><div class="line">  	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">'defaultActiveIndex'</span> <span class="keyword">in</span> currProps) &#123;</div><div class="line">  		activeIndex = currProps.defaultActiveIndex;</div><div class="line">  	&#125;</div><div class="line"></div><div class="line">  	this.state = &#123;</div><div class="line">  		activeIndex,</div><div class="line">  		prevIndex: activeIndex,</div><div class="line">  	&#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  componentWillReceiveProps(nextProps) &#123;</div><div class="line">  	// 如果props传入activeIndex 则直接更新</div><div class="line">  	<span class="keyword">if</span> (<span class="string">'activeIndex'</span> <span class="keyword">in</span> nextProps) &#123;</div><div class="line">  		this.setState(&#123;</div><div class="line">  			activeIndex: nextProps.activeIndex,</div><div class="line">  		&#125;);</div><div class="line">  	&#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  handleTabClick(activeIndex) &#123;</div><div class="line">  	const prevIndex = this.state.prevIndex;</div><div class="line"></div><div class="line">  	// 如果当前 activeIndex 与传入的 activeIndex 不一致，</div><div class="line">  	// 并且props中存在 defaultActiveIndex时，则更新</div><div class="line">  	<span class="keyword">if</span> (this.state.activeIndex !== activeIndex &amp;&amp; <span class="string">'defaultActiveIndex'</span> <span class="keyword">in</span> this.props) &#123;</div><div class="line">  		this.setState(&#123;</div><div class="line">  			activeIndex,</div><div class="line">  			prevIndex,</div><div class="line">  		&#125;);</div><div class="line"></div><div class="line">  		//更新后执行回调函数，抛出当前索引和上一次索引</div><div class="line">  		this.props.onChange(&#123; activeIndex, prevIndex&#125;);</div><div class="line">  	&#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">renderTabNav</span></span>() &#123;</div><div class="line">  	const &#123; classPrefix, children &#125; = this.props;</div><div class="line"></div><div class="line">  	<span class="built_in">return</span> (</div><div class="line">  		&lt;TabNav</div><div class="line">  		  key = <span class="string">"tabBar"</span></div><div class="line">  		  classPrefix = &#123;classPrefix&#125;</div><div class="line">  		  onTabClick = &#123;this.handTabClick&#125;</div><div class="line">  		  panels = &#123;children&#125;</div><div class="line">  		  activeIndex = &#123;this.state.activeIndex&#125;</div><div class="line">  		/&gt;</div><div class="line">  	) </div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">renderTabContent</span></span>() &#123;</div><div class="line">  	const &#123; classPrefix, children &#125; = this.props;</div><div class="line"></div><div class="line">  	<span class="built_in">return</span> (</div><div class="line">  		&lt;TabContent</div><div class="line">  			key = <span class="string">"tabcontent"</span></div><div class="line">  			classPrefix = &#123;classPrefix&#125;</div><div class="line">  			panels = &#123;children&#125;</div><div class="line">  			activeIndex = &#123;this.state.activeIndex&#125;</div><div class="line">  		/&gt;</div><div class="line">  	)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">render</span></span>() &#123;</div><div class="line">  	const &#123; className &#125; = this.props;</div><div class="line">  	// className 用于合并class</div><div class="line">  	const classes = classnames(className, <span class="string">'ui-tabs'</span>);</div><div class="line"></div><div class="line">  	<span class="built_in">return</span> (</div><div class="line">  		&lt;div className = &#123;classes&#125;&gt;</div><div class="line">  			&#123; this.renderTabNav()&#125;</div><div class="line">  			&#123; this.renderTabContent()&#125;</div><div class="line">  		&lt;/div&gt;</div><div class="line">  	)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class TabNav extends Component &#123;</div><div class="line">  static propTypes = &#123;</div><div class="line">    classPrefix: React.PropTypes.string,</div><div class="line">    panels: PropTypes.node,</div><div class="line">    activeIndex: PropTypes.number,</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">getTabs</span></span>() &#123;</div><div class="line">    const &#123; panels, classPrefix, activeIndex &#125; = this.props;</div><div class="line"></div><div class="line">    <span class="built_in">return</span> React.Children.map(panels, (child) =&gt; &#123;</div><div class="line">      <span class="keyword">if</span> (!child) &#123; <span class="built_in">return</span>; &#125;</div><div class="line"></div><div class="line">      const order = parseInt(child.props.order, 10);</div><div class="line"></div><div class="line">      // 利用 class 控制显示和隐藏</div><div class="line">      <span class="built_in">let</span> classes = classnames(&#123;</div><div class="line">        [`<span class="variable">$&#123;classPrefix&#125;</span>-tab`]: <span class="literal">true</span>,</div><div class="line">        [`<span class="variable">$&#123;classPrefix&#125;</span>-active`]: activeIndex === order,</div><div class="line">        [`<span class="variable">$&#123;classPrefix&#125;</span>-disabled`]: child.props.disabled,</div><div class="line">      &#125;);</div><div class="line"></div><div class="line">      <span class="built_in">let</span> events = &#123;&#125;;</div><div class="line">      <span class="keyword">if</span> (!child.props.disabled) &#123;</div><div class="line">        events = &#123;</div><div class="line">          onClick: this.props.onTabClick.bind(this, order),</div><div class="line">        &#125;;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      const ref = &#123;&#125;;</div><div class="line">      <span class="keyword">if</span> (activeIndex === order) &#123;</div><div class="line">        ref.ref = <span class="string">'activeTab'</span>;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="built_in">return</span> (</div><div class="line">        &lt;li</div><div class="line">          role=<span class="string">"tab"</span></div><div class="line">          aria-disabled=&#123;child.props.disabled ? <span class="string">'true'</span> : <span class="string">'false'</span>&#125;</div><div class="line">          aria-selected=&#123;activeIndex === order ? <span class="string">'true'</span> : <span class="string">'false'</span>&#125;</div><div class="line">          &#123;...evnets&#125;</div><div class="line">          className=&#123;classes&#125;</div><div class="line">          key=&#123;order&#125;</div><div class="line">          &#123;...ref&#125;</div><div class="line">        &gt;</div><div class="line">          &#123;child.props.tab&#125;</div><div class="line">        &lt;/li&gt;</div><div class="line">      );</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">render</span></span>() &#123;</div><div class="line">    const &#123; classPrefix &#125; = this.props;</div><div class="line"></div><div class="line">    const rootClasses = classnames(&#123;</div><div class="line">      [`<span class="variable">$&#123;classPrefix&#125;</span>-bar`]: <span class="literal">true</span>,</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    const classes = classnames(&#123;</div><div class="line">      [`<span class="variable">$&#123;classPrefix&#125;</span>-nav`]: <span class="literal">true</span>,</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="built_in">return</span> (</div><div class="line">      &lt;div classNmae=&#123;rootClasses&#125; role=<span class="string">"tablist"</span>&gt;</div><div class="line">        &lt;ul className=&#123;classes&#125;&gt;</div><div class="line">          &#123;this.getTabs()&#125;</div><div class="line">        &lt;/ul&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class TabContent extends Component &#123;</div><div class="line">  static propTypes = &#123;</div><div class="line">    classPrefix: React.PropTypes.string,</div><div class="line">    panels: PropTypes.node,</div><div class="line">    activeIndex: PropTypes.number,</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">getTabPanes</span></span>() &#123;</div><div class="line">    const &#123; classPrefix, activeIndex, panels &#125; = this.props;</div><div class="line"></div><div class="line">    <span class="built_in">return</span> React.Children.map(panels, (child) =&gt; &#123;</div><div class="line">      <span class="keyword">if</span> (!child) &#123; <span class="built_in">return</span>; &#125;</div><div class="line"></div><div class="line">      const order = parseInt(child.props.order, 10);</div><div class="line">      const isActive = activeIndex === order;</div><div class="line"></div><div class="line">      <span class="built_in">return</span> React.cloneElement(child, &#123;</div><div class="line">        classPrefix,</div><div class="line">        isActive,</div><div class="line">        children: child.props.children,</div><div class="line">        key: `tabpane-<span class="variable">$&#123;order&#125;</span>`,</div><div class="line">      &#125;);</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">render</span></span>() &#123;</div><div class="line">    const &#123; classPrefix &#125; = this.props;</div><div class="line"></div><div class="line">    const classes = classnames(&#123;</div><div class="line">      [`<span class="variable">$&#123;classPrefix&#125;</span>-content`]: <span class="literal">true</span>,</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="built_in">return</span> (</div><div class="line">      &lt;div className = &#123;classes&#125; &gt;</div><div class="line">        &#123;this.getTabPanes()&#125;</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class TabPane extends Component &#123;</div><div class="line">  static propTypes = &#123;</div><div class="line">    tab: PropTypes.pneOfType([</div><div class="line">      PropTypes.string,</div><div class="line">      PropTypes.node,</div><div class="line">    ]).isRequired,</div><div class="line">    order: PropTypes.string.isRequired,</div><div class="line">    <span class="built_in">disable</span>: PropTypes.bool,</div><div class="line">    isActive: PropTypes.bool,</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">render</span></span>() &#123;</div><div class="line">    const &#123; classPrefix, className, isActive, children &#125; = this.props;</div><div class="line"></div><div class="line">    const classes = classnames(&#123;</div><div class="line">      [className]: className,</div><div class="line">      [`<span class="variable">$&#123;classPrefix&#125;</span>-panel`]: <span class="literal">true</span>,</div><div class="line">      [`<span class="variable">$&#123;classPrefix&#125;</span>-active`]: isActive,</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="built_in">return</span> (</div><div class="line">      &lt;div</div><div class="line">        role=<span class="string">"tabpanel"</span></div><div class="line">        className=&#123;classes&#125;</div><div class="line">        aria-hidden=&#123;!isActive&#125;&gt;</div><div class="line">        &#123;children&#125;</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/09/05/【学习】深入React技术栈-2-漫谈React/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/08/20/【学习】深入React技术栈-1-初入React世界/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Jlala's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.svg);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.svg);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.svg);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Jlala
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+
+    <script src="/js/lazyload.min.js"></script>
+    <script src="/js/js.min.js"></script>
+
+
+
+    <script src="/js/nprogress.js"></script>
+
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+<script>
+    <!-- Offer LazyLoad -->
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    <!-- Start Queue -->
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
