@@ -395,7 +395,7 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <h2 id="配置静态文件规则"><a href="#配置静态文件规则" class="headerlink" title="配置静态文件规则"></a>配置静态文件规则</h2><p>root: 为nodejs应用的根目录到public<br>expires: 缓存时间</p>
-<p>location ~ ^/(images|javascript|js|css|flash|media|static)/  {<br>  root        xxx;<br>  access_log  off;<br>  expires     30d;<br>}</p>
+<p>location ~ ^/(images/|img/|javascript/|js/|css/|stylesheets/|flash/|media/|static/|robots.txt|humans.txt|favicon.ico) {<br>  root        xxx;<br>  access_log  off;<br>  expires     30d;<br>}</p>
 
     
 
