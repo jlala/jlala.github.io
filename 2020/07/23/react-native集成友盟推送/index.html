@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.4 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            react-native集成友盟推送 | 
+        
+        Jlala
+    </title>
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+    
+    
+
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Jlala">
+    <meta name="description" content="jlala-blog,nodejs,react-native,react,小小的程序员">
+    <meta name="keywords" content="null">
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Jlala">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="react-native集成友盟推送 | Jlala">
+    <meta property="og:description" content="jlala-blog,nodejs,react-native,react,小小的程序员">
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS & jQuery -->
+    
+        <link rel="stylesheet" href="/css/material.min.css">
+        <link rel="stylesheet" href="/css/style.min.css">
+        <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/queue.js"></script>
+    
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#react-native集成友盟推送-android篇"><span class="post-toc-number">1.</span> <span class="post-toc-text">react-native集成友盟推送-android篇</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一：获取devicetoken"><span class="post-toc-number"></span> <span class="post-toc-text">一：获取devicetoken</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二：厂商通道集成"><span class="post-toc-number"></span> <span class="post-toc-text">二：厂商通道集成</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三：React-Native代码配置"><span class="post-toc-number"></span> <span class="post-toc-text">三：React-Native代码配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#react-native集成友盟推送-ios篇"><span class="post-toc-number">1.</span> <span class="post-toc-text">react-native集成友盟推送-ios篇</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一：导入相关framework"><span class="post-toc-number"></span> <span class="post-toc-text">一：导入相关framework</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二：引入相关module文件"><span class="post-toc-number"></span> <span class="post-toc-text">二：引入相关module文件</span></a>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                react-native集成友盟推送
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Jlala</strong>
+        <span>7月 23, 2020</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=react-native集成友盟推送&url=http://yoursite.com//2020/07/23/react-native集成友盟推送/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=react-native集成友盟推送&url=http://yoursite.com//2020/07/23/react-native集成友盟推送/index.html&via=Jlala" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2020/07/23/react-native集成友盟推送/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2020/07/23/react-native集成友盟推送/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h4 id="react-native集成友盟推送-android篇"><a href="#react-native集成友盟推送-android篇" class="headerlink" title="react-native集成友盟推送-android篇"></a>react-native集成友盟推送-android篇</h4><h3 id="一：获取devicetoken"><a href="#一：获取devicetoken" class="headerlink" title="一：获取devicetoken"></a>一：获取devicetoken</h3><p>运行友盟推送demo正常，但是通过import module的方式引入因为编译问题导致只能自己手动集成sdk到rn项目中</p>
+<p>1.在工程android的app的build.gradle中添加</p>
+<p>和buildTypes同级添加</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sourceSets &#123;</span><br><span class="line">  main &#123;</span><br><span class="line">    jniLibs.srcDirs = [<span class="string">'libs'</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>libs目录中把所有的so文件加入</p>
+<p><a href="https://developer.umeng.com/docs/67966/detail/67080" target="_blank" rel="noopener">https://developer.umeng.com/docs/67966/detail/67080</a></p>
+<p>2.在dependencies中implementation push的基础组件库</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//基础组件库依赖(必须) Push 6.1.0版本必须升级新版本Common SDK</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:common:9.1.0'</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:utdid:1.5.2'</span></span><br><span class="line">implementation  <span class="string">'com.umeng.umsdk:asms:1.1.3'</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:crash:0.0.4'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//友盟push相关依赖(必须)</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:push:6.1.0'</span></span><br><span class="line"></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:alicloud-httpdns:1.2.5'</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:alicloud-utils:1.1.5'</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:alicloud_beacon:1.0.1'</span></span><br><span class="line"></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:agoo-accs:3.3.8.8-open-fix2'</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:agoo_networksdk:3.5.5'</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:agoo_tlog:3.0.0.17'</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:agoo_tnet4android:3.1.14.9'</span></span><br></pre></td></tr></table></figure>
+<p>3.在AndroidManifest.xml文件中引入权限声明</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 start--&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.INTERNET"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_NETWORK_STATE"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_WIFI_STATE"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.WAKE_LOCK"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.READ_PHONE_STATE"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.BROADCAST_PACKAGE_ADDED"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.BROADCAST_PACKAGE_CHANGED"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.BROADCAST_PACKAGE_INSTALL"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.BROADCAST_PACKAGE_REPLACED"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.GET_TASKS"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.RECEIVE_BOOT_COMPLETED"</span> /&gt;</span><br><span class="line">&lt;!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 end--&gt;</span><br></pre></td></tr></table></figure>
+<p>引入基础组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 以下为基本配置信息，需要自行添加至您的AndroidManifest文件中 start--&gt;</span><br><span class="line">        &lt;service</span><br><span class="line">            android:name=<span class="string">"com.taobao.accs.ChannelService"</span></span><br><span class="line">            android:exported=<span class="string">"true"</span></span><br><span class="line">            android:process=<span class="string">":channel"</span>&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=<span class="string">"com.taobao.accs.intent.action.SERVICE"</span> /&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">            &lt;intent-filter&gt;</span></span><br><span class="line"><span class="regexp">                &lt;action android:name="com.taobao.accs.intent.action.ELECTION" /</span>&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>service&gt;</span><br><span class="line"></span><br><span class="line">        &lt;service</span><br><span class="line">            android:name=<span class="string">"com.taobao.accs.data.MsgDistributeService"</span></span><br><span class="line">            android:exported=<span class="string">"true"</span>&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=<span class="string">"com.taobao.accs.intent.action.RECEIVE"</span> /&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>service&gt;</span><br><span class="line"></span><br><span class="line">        &lt;receiver</span><br><span class="line">            android:name=<span class="string">"com.taobao.accs.EventReceiver"</span></span><br><span class="line">            android:process=<span class="string">":channel"</span>&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=<span class="string">"android.intent.action.BOOT_COMPLETED"</span> /&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">            &lt;intent-filter&gt;</span></span><br><span class="line"><span class="regexp">                &lt;action android:name="android.net.conn.CONNECTIVITY_CHANGE" /</span>&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">            &lt;intent-filter&gt;</span></span><br><span class="line"><span class="regexp">                &lt;action android:name="android.intent.action.PACKAGE_REMOVED" /</span>&gt;</span><br><span class="line">                &lt;data android:scheme=<span class="string">"package"</span> /&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">            &lt;intent-filter&gt;</span></span><br><span class="line"><span class="regexp">                &lt;action android:name="android.intent.action.USER_PRESENT" /</span>&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>receiver&gt;</span><br><span class="line"></span><br><span class="line">        &lt;receiver</span><br><span class="line">            android:name=<span class="string">"com.taobao.accs.ServiceReceiver"</span></span><br><span class="line">            android:process=<span class="string">":channel"</span>&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=<span class="string">"com.taobao.accs.intent.action.COMMAND"</span> /&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">            &lt;intent-filter&gt;</span></span><br><span class="line"><span class="regexp">                &lt;action android:name="com.taobao.accs.intent.action.START_FROM_AGOO" /</span>&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>receiver&gt;</span><br><span class="line"></span><br><span class="line">        &lt;service</span><br><span class="line">            android:name=<span class="string">"com.taobao.accs.internal.AccsJobService"</span></span><br><span class="line">            android:permission=<span class="string">"android.permission.BIND_JOB_SERVICE"</span></span><br><span class="line">            android:process=<span class="string">":channel"</span>/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;service</span><br><span class="line">            android:name=<span class="string">"com.taobao.accs.ChannelService$KernelService"</span></span><br><span class="line">            android:process=<span class="string">":channel"</span> /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;service</span><br><span class="line">            android:name=<span class="string">"org.android.agoo.accs.AgooService"</span></span><br><span class="line">            android:exported=<span class="string">"true"</span>&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=<span class="string">"com.taobao.accs.intent.action.RECEIVE"</span> /&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>service&gt;</span><br><span class="line"></span><br><span class="line">        &lt;service</span><br><span class="line">            android:name=<span class="string">"com.umeng.message.UmengIntentService"</span></span><br><span class="line">            android:exported=<span class="string">"true"</span></span><br><span class="line">            android:process=<span class="string">":channel"</span>&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=<span class="string">"org.agoo.android.intent.action.RECEIVE"</span> /&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>service&gt;</span><br><span class="line"></span><br><span class="line">        &lt;service</span><br><span class="line">            android:name=<span class="string">"com.umeng.message.XiaomiIntentService"</span></span><br><span class="line">            android:exported=<span class="string">"true"</span></span><br><span class="line">            android:process=<span class="string">":channel"</span>&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=<span class="string">"org.agoo.android.intent.action.RECEIVE"</span> /&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>service&gt;</span><br><span class="line"></span><br><span class="line">        &lt;receiver</span><br><span class="line">            android:name=<span class="string">"com.taobao.agoo.AgooCommondReceiver"</span></span><br><span class="line">            android:exported=<span class="string">"true"</span></span><br><span class="line">            android:process=<span class="string">":channel"</span>&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=<span class="string">"$&#123;applicationId&#125;.intent.action.COMMAND"</span> /&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">            &lt;intent-filter&gt;</span></span><br><span class="line"><span class="regexp">                &lt;action android:name="android.intent.action.PACKAGE_REMOVED" /</span>&gt;</span><br><span class="line">                &lt;data android:scheme=<span class="string">"package"</span> /&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>receiver&gt;</span><br><span class="line"></span><br><span class="line">        &lt;service</span><br><span class="line">            android:name=<span class="string">"com.umeng.message.UmengMessageIntentReceiverService"</span></span><br><span class="line">            android:exported=<span class="string">"true"</span></span><br><span class="line">            android:process=<span class="string">":channel"</span>&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=<span class="string">"org.android.agoo.client.MessageReceiverService"</span> /&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>service&gt;</span><br><span class="line"></span><br><span class="line">        &lt;receiver</span><br><span class="line">            android:name=<span class="string">"com.umeng.message.NotificationProxyBroadcastReceiver"</span></span><br><span class="line">            android:exported=<span class="string">"false"</span> /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;service</span><br><span class="line">            android:name=<span class="string">"com.umeng.message.UmengMessageCallbackHandlerService"</span></span><br><span class="line">            android:permission=<span class="string">"android.permission.BIND_JOB_SERVICE"</span></span><br><span class="line">            android:exported=<span class="string">"false"</span>&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=<span class="string">"com.umeng.messge.registercallback.action"</span> /&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">            &lt;intent-filter&gt;</span></span><br><span class="line"><span class="regexp">                &lt;action android:name="com.umeng.message.enablecallback.action" /</span>&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">            &lt;intent-filter&gt;</span></span><br><span class="line"><span class="regexp">                &lt;action android:name="com.umeng.message.disablecallback.action" /</span>&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">            &lt;intent-filter&gt;</span></span><br><span class="line"><span class="regexp">                &lt;action android:name="com.umeng.message.message.handler.action" /</span>&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">            &lt;intent-filter&gt;</span></span><br><span class="line"><span class="regexp">                &lt;action android:name="com.umeng.message.message.sendmessage.action" /</span>&gt;</span><br><span class="line">            &lt;<span class="regexp">/intent-filter&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>service&gt;</span><br><span class="line"></span><br><span class="line">        &lt;service</span><br><span class="line">            android:name=<span class="string">"com.umeng.message.UmengDownloadResourceService"</span></span><br><span class="line">            android:permission=<span class="string">"android.permission.BIND_JOB_SERVICE"</span></span><br><span class="line">            android:exported=<span class="string">"false"</span> /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;provider</span><br><span class="line">            android:name=<span class="string">"com.umeng.message.provider.MessageProvider"</span></span><br><span class="line">            android:authorities=<span class="string">"$&#123;applicationId&#125;.umeng.message"</span></span><br><span class="line">            android:exported=<span class="string">"false"</span>&gt;</span><br><span class="line">            &lt;grant-uri-permission android:pathPattern=<span class="string">".*"</span> /&gt;</span><br><span class="line">        &lt;<span class="regexp">/provider&gt;</span></span><br><span class="line"><span class="regexp">        &lt;!-- 以下为基本配置信息，需要自行添加至您的AndroidManifest文件中 end--&gt;</span></span><br></pre></td></tr></table></figure>
+<p>4.在工程android中的build.gradle中配置脚本的buildscript和allprojects段中添加【友盟+】sdk 新maven仓库地址</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maven &#123; url <span class="string">'https://dl.bintray.com/umsdk/release'</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>5.在MainApplication主工程中onCreate方法中初始化友盟sdk和pushsdk</p>
+<p>这里必须register，不然在rn中无法获取device token</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">RNUMConfigure.init(<span class="keyword">this</span>, UMENG_APPKEY, <span class="string">"Umeng"</span>, UMConfigure.DEVICE_TYPE_PHONE,</span><br><span class="line">            UMENG_MESSAGESECRET);</span><br><span class="line">PushAgent mPushAgent = PushAgent.getInstance(<span class="keyword">this</span>);</span><br><span class="line">  <span class="comment">//注册推送服务，每次调用register方法都会回调该接口</span></span><br><span class="line">  mPushAgent.register(<span class="keyword">new</span> IUmengRegisterCallback() &#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(String deviceToken)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//注册成功会返回deviceToken deviceToken是推送消息的唯一标志</span></span><br><span class="line">    Log.i(TAG,<span class="string">"注册成功：deviceToken：--------&gt;  "</span> + deviceToken);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(String s, String s1)</span> </span>&#123;</span><br><span class="line">  	Log.e(TAG,<span class="string">"注册失败：--------&gt;  "</span> + <span class="string">"s:"</span> + s + <span class="string">",s1:"</span> + s1);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在MainActivity的onCreate方法中添加统计方法，并添加pushinit方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PushModule.initPushSDK(<span class="keyword">this</span>);</span><br><span class="line">PushAgent.getInstance(<span class="keyword">this</span>).onAppStart();</span><br></pre></td></tr></table></figure>
+<h3 id="二：厂商通道集成"><a href="#二：厂商通道集成" class="headerlink" title="二：厂商通道集成"></a>二：厂商通道集成</h3><p>友盟文档<a href="https://developer.umeng.com/docs/67966/detail/98589" target="_blank" rel="noopener">https://developer.umeng.com/docs/67966/detail/98589</a></p>
+<p>1.在工程android的app的build.gradle中集成厂商sdk</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">'com.umeng.umsdk:huawei-basetb:2.6.3.306'</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:huawei-pushtb:2.6.3.306'</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:huawei-umengaccs:1.2.4'</span></span><br><span class="line"></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:meizu-push:3.8.7'</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:meizu-umengaccs:1.1.1'</span></span><br><span class="line"></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:oppo-push:2.0.2'</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:oppo-umengaccs:1.0.6'</span></span><br><span class="line"></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:vivo-push:2.3.5'</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:vivo-umengaccs:1.1.0'</span></span><br><span class="line"></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:xiaomi-push:3.7.0'</span></span><br><span class="line">implementation <span class="string">'com.umeng.umsdk:xiaomi-umengaccs:1.1.4'</span></span><br></pre></td></tr></table></figure>
+<p>2.在MainApplication中初始化厂商sdk</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 初始化厂商通道</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//小米通道</span></span><br><span class="line">MiPushRegistar.register(<span class="keyword">this</span>, <span class="string">"填写您在小米后台APP对应的xiaomi id"</span>, <span class="string">"填写您在小米后台APP对应的xiaomi key"</span>);</span><br><span class="line"><span class="comment">//华为通道，注意华为通道的初始化参数在minifest中配置</span></span><br><span class="line">HuaWeiRegister.register(<span class="keyword">this</span>);</span><br><span class="line"><span class="comment">//魅族通道</span></span><br><span class="line">MeizuRegister.register(<span class="keyword">this</span>, <span class="string">"填写您在魅族后台APP对应的app id"</span>, <span class="string">"填写您在魅族后台APP对应的app key"</span>);</span><br><span class="line"><span class="comment">//OPPO通道</span></span><br><span class="line">OppoRegister.register(<span class="keyword">this</span>, <span class="string">"填写您在OPPO后台APP对应的app key"</span>, <span class="string">"填写您在魅族后台APP对应的app secret"</span>);</span><br><span class="line"><span class="comment">//VIVO 通道，注意VIVO通道的初始化参数在minifest中配置</span></span><br><span class="line">VivoRegister.register(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+<p>3.问题Huawei allowBackup=”true”冲突</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;manifest xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span></span><br><span class="line">    <span class="keyword">package</span>=<span class="string">"com.example.push.umeng.umengomnipushdemo"</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;application</span><br><span class="line">        tools:replace=<span class="string">"android:allowBackup"</span></span><br><span class="line">        android:allowBackup=<span class="string">"true"</span></span><br><span class="line">        android:name=<span class="string">".MyApplication"</span></span><br><span class="line">        android:icon=<span class="string">"@mipmap/ic_launcher"</span></span><br><span class="line">        android:label=<span class="string">"@string/app_name"</span></span><br><span class="line">        android:roundIcon=<span class="string">"@mipmap/ic_launcher_round"</span></span><br><span class="line">        android:supportsRtl=<span class="string">"true"</span></span><br><span class="line">        android:theme=<span class="string">"@style/AppTheme"</span></span><br><span class="line">        &gt;</span><br><span class="line">        &lt;activity android:name=<span class="string">".MainActivity"</span>&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;category android:name=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span><br><span class="line">            &lt;/intent-filter&gt;</span><br><span class="line">        &lt;/activity&gt;</span><br><span class="line">    &lt;/application&gt;</span><br><span class="line"></span><br><span class="line">&lt;/manifest&gt;</span><br></pre></td></tr></table></figure>
+<p>4.在androidmanifest.xml中添加厂商idkey等声明</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">华为appid</span><br><span class="line">&lt;meta-data</span><br><span class="line">    android:name=<span class="string">"com.huawei.hms.client.appid"</span></span><br><span class="line">    android:value=<span class="string">"appid=xxxxxx"</span> /&gt;</span><br><span class="line">    </span><br><span class="line">&lt;!--魅族push应用定义消息receiver声明 --&gt;</span><br><span class="line">&lt;receiver android:name=<span class="string">"$&#123;applicationId&#125;.MeizuTestReceiver"</span>&gt;</span><br><span class="line">        &lt;intent-filter&gt;</span><br><span class="line">            &lt;!-- 接收push消息 --&gt;</span><br><span class="line">            &lt;action android:name=<span class="string">"com.meizu.flyme.push.intent.MESSAGE"</span> /&gt;</span><br><span class="line">            &lt;!-- 接收register消息 --&gt;</span><br><span class="line">            &lt;action android:name=<span class="string">"com.meizu.flyme.push.intent.REGISTER.FEEDBACK"</span> /&gt;</span><br><span class="line">            &lt;!-- 接收unregister消息--&gt;</span><br><span class="line">            &lt;action android:name=<span class="string">"com.meizu.flyme.push.intent.UNREGISTER.FEEDBACK"</span> /&gt;</span><br><span class="line">            &lt;!-- 兼容低版本Flyme3推送服务配置 --&gt;</span><br><span class="line">            &lt;action android:name=<span class="string">"com.meizu.c2dm.intent.REGISTRATION"</span> /&gt;</span><br><span class="line">            &lt;action android:name=<span class="string">"com.meizu.c2dm.intent.RECEIVE"</span> /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;category android:name="$&#123;applicationId&#125;"&gt;&lt;/category&gt;</span><br><span class="line">        &lt;/intent-filter&gt;</span><br><span class="line">&lt;/receiver&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--vivo push参数声明 --&gt;</span><br><span class="line">&lt;!-- vivo start--&gt;</span><br><span class="line">&lt;meta-data</span><br><span class="line"> android:name=<span class="string">"com.vivo.push.api_key"</span></span><br><span class="line"> android:value=<span class="string">"xxxxxx"</span> /&gt;</span><br><span class="line">&lt;meta-data</span><br><span class="line"> android:name=<span class="string">"com.vivo.push.app_id"</span></span><br><span class="line"> android:value=<span class="string">"xxxxxx"</span> /&gt;</span><br><span class="line">&lt;!-- VIVO end--&gt;</span><br></pre></td></tr></table></figure>
+<p>5.添加托管弹窗功能，在对应umeng的文件夹下添加java文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MipushTestActivity</span> <span class="keyword">extends</span> <span class="title">UmengNotifyClickActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String TAG = MipushTestActivity.class.getName();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle bundle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(bundle);</span><br><span class="line">        setContentView(R.layout.activity_mipush);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMessage</span><span class="params">(Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onMessage(intent);  <span class="comment">//此方法必须调用，否则无法统计打开数</span></span><br><span class="line">        String body = intent.getStringExtra(AgooConstants.MESSAGE_BODY);</span><br><span class="line">        Log.i(TAG, body);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在AndroidManifest.xml中配置该Activity，并设置launchMode=”singleTask”和exported=”true”：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">      android:name=<span class="string">"com.umeng.message.example.MipushTestActivity"</span></span><br><span class="line">      android:launchMode=<span class="string">"singleTask"</span></span><br><span class="line">      android:exported=<span class="string">"true"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>魅族push初始化，自定义Recevier组件受魅族接入方式限制，必须在包名目录实现一个自定义Recevier，继承自MeizuPushReceiver</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MeizuTestReceiver</span> <span class="keyword">extends</span> <span class="title">MeizuPushReceiver</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三：React-Native代码配置"><a href="#三：React-Native代码配置" class="headerlink" title="三：React-Native代码配置"></a>三：React-Native代码配置</h3><p>1.下载友盟rn相关的sdk</p>
+<p>2.引入common文件</p>
+<p>DplusReactPackage.java RNUMConfigure.java PushModule.java</p>
+<p>此处必须引入pushmodule才能在rn中通过pushutil获取原生方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;NativeModule&gt; <span class="title">createNativeModules</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  ReactApplicationContext reactContext)</span> </span>&#123;</span><br><span class="line">  List&lt;NativeModule&gt; modules = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">  modules.add(<span class="keyword">new</span> ShareModule(reactContext));</span><br><span class="line">  modules.add(<span class="keyword">new</span> PushModule(reactContext));</span><br><span class="line">  modules.add(<span class="keyword">new</span> AnalyticsModule(reactContext));</span><br><span class="line">  <span class="keyword">return</span> modules;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>.add方法载入相关模块</p>
+<p>3.引入js相关工具文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123; NativeModules &#125; = <span class="built_in">require</span>(<span class="string">'react-native'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> UMPushModule = NativeModules.UMPushModule;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">PushUtil</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> appInfo(callback) &#123;</span><br><span class="line">    UMPushModule.appInfo(<span class="function"><span class="params">info</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> callback(info);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4.在相关rn代码中调用工具文件的appinfo方法获取devicetoken</p>
+<h4 id="react-native集成友盟推送-ios篇"><a href="#react-native集成友盟推送-ios篇" class="headerlink" title="react-native集成友盟推送-ios篇"></a>react-native集成友盟推送-ios篇</h4><h3 id="一：导入相关framework"><a href="#一：导入相关framework" class="headerlink" title="一：导入相关framework"></a>一：导入相关framework</h3><p>1.因为友盟common7.1.1版本中统计和通用合并，所以移除统计相关代码，并在引入文件处统一修改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UMCommon/MobClick.h&gt;</span><br></pre></td></tr></table></figure>
+<p>引入UMCommon UMPush UTDID 等framework</p>
+<h3 id="二：引入相关module文件"><a href="#二：引入相关module文件" class="headerlink" title="二：引入相关module文件"></a>二：引入相关module文件</h3><p>1.引入UMPushModule.h .m等文件</p>
+<p>2.在appdelegate.m中对push组建基本功能配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UMPush/UMessage.h&gt;</span><br><span class="line"></span><br><span class="line">/* Umeng init */</span><br><span class="line">  [RNUMConfigure initWithAppkey:UMENG_APPKEY channel:@&quot;App Store&quot;];</span><br><span class="line">  </span><br><span class="line">// Push功能配置</span><br><span class="line">  UMessageRegisterEntity * entity = [[UMessageRegisterEntity alloc] init];</span><br><span class="line">  entity.types = UMessageAuthorizationOptionBadge|UMessageAuthorizationOptionAlert|UMessageAuthorizationOptionSound;</span><br><span class="line">  //如果你期望使用交互式(只有iOS 8.0及以上有)的通知，请参考下面注释部分的初始化代码</span><br><span class="line">  if (([[[UIDevice currentDevice] systemVersion]intValue]&gt;=8)&amp;&amp;([[[UIDevice currentDevice] systemVersion]intValue]&lt;10)) &#123;</span><br><span class="line">          UIMutableUserNotificationAction *action1 = [[UIMutableUserNotificationAction alloc] init];</span><br><span class="line">          action1.identifier = @&quot;action1_identifier&quot;;</span><br><span class="line">          action1.title=@&quot;打开应用&quot;;</span><br><span class="line">          action1.activationMode = UIUserNotificationActivationModeForeground;//当点击的时候启动程序</span><br><span class="line"></span><br><span class="line">          UIMutableUserNotificationAction *action2 = [[UIMutableUserNotificationAction alloc] init];  //第二按钮</span><br><span class="line">          action2.identifier = @&quot;action2_identifier&quot;;</span><br><span class="line">          action2.title=@&quot;忽略&quot;;</span><br><span class="line">          action2.activationMode = UIUserNotificationActivationModeBackground;//当点击的时候不启动程序，在后台处理</span><br><span class="line">          action2.authenticationRequired = YES;//需要解锁才能处理，如果action.activationMode = UIUserNotificationActivationModeForeground;则这个属性被忽略；</span><br><span class="line">          action2.destructive = YES;</span><br><span class="line">          UIMutableUserNotificationCategory *actionCategory1 = [[UIMutableUserNotificationCategory alloc] init];</span><br><span class="line">          actionCategory1.identifier = @&quot;category1&quot;;//这组动作的唯一标示</span><br><span class="line">          [actionCategory1 setActions:@[action1,action2] forContext:(UIUserNotificationActionContextDefault)];</span><br><span class="line">          NSSet *categories = [NSSet setWithObjects:actionCategory1, nil];</span><br><span class="line">          entity.categories=categories;</span><br><span class="line">      &#125;</span><br><span class="line">      //如果要在iOS10显示交互式的通知，必须注意实现以下代码</span><br><span class="line">      if ([[[UIDevice currentDevice] systemVersion]intValue]&gt;=10) &#123;</span><br><span class="line">          UNNotificationAction *action1_ios10 = [UNNotificationAction actionWithIdentifier:@&quot;action1_identifier&quot; title:@&quot;打开应用&quot; options:UNNotificationActionOptionForeground];</span><br><span class="line">          UNNotificationAction *action2_ios10 = [UNNotificationAction actionWithIdentifier:@&quot;action2_identifier&quot; title:@&quot;忽略&quot; options:UNNotificationActionOptionForeground];</span><br><span class="line"></span><br><span class="line">          //UNNotificationCategoryOptionNone</span><br><span class="line">          //UNNotificationCategoryOptionCustomDismissAction  清除通知被触发会走通知的代理方法</span><br><span class="line">          //UNNotificationCategoryOptionAllowInCarPlay       适用于行车模式</span><br><span class="line">          UNNotificationCategory *category1_ios10 = [UNNotificationCategory categoryWithIdentifier:@&quot;category1&quot; actions:@[action1_ios10,action2_ios10]   intentIdentifiers:@[] options:UNNotificationCategoryOptionCustomDismissAction];</span><br><span class="line">          NSSet *categories = [NSSet setWithObjects:category1_ios10, nil];</span><br><span class="line">          entity.categories=categories;</span><br><span class="line">      &#125;</span><br><span class="line">  [UNUserNotificationCenter currentNotificationCenter].delegate=self;</span><br><span class="line">  [UMessage registerForRemoteNotificationsWithLaunchOptions:launchOptions Entity:entity completionHandler:^(BOOL granted, NSError * _Nullable error) &#123;</span><br><span class="line">      if (granted) &#123;</span><br><span class="line">      &#125;else&#123;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;];</span><br><span class="line"></span><br><span class="line">//************************************************UMeng Push start************************************************</span><br><span class="line"></span><br><span class="line">////注册 APNS 成功并上报 DeviceToken</span><br><span class="line">- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken &#123;</span><br><span class="line">  NSLog(@&quot;deviceToken:%@&quot;,deviceToken);</span><br><span class="line">  NSLog(@&quot;%@&quot;,[[[[deviceToken description] stringByReplacingOccurrencesOfString: @&quot;&lt;&quot; withString: @&quot;&quot;]stringByReplacingOccurrencesOfString: @&quot;&gt;&quot; withString: @&quot;&quot;]stringByReplacingOccurrencesOfString: @&quot; &quot; withString: @&quot;&quot;]);</span><br><span class="line">  [UMessage registerDeviceToken:deviceToken];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//iOS10以下使用这两个方法接收通知</span><br><span class="line">-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler</span><br><span class="line">&#123;</span><br><span class="line">    [UMessage setAutoAlert:NO];</span><br><span class="line">    if([[[UIDevice currentDevice] systemVersion]intValue] &lt; 10)&#123;</span><br><span class="line">        [UMessage didReceiveRemoteNotification:userInfo];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //过滤掉Push的撤销功能，因为PushSDK内部已经调用的completionHandler(UIBackgroundFetchResultNewData)，</span><br><span class="line">    //防止两次调用completionHandler引起崩溃</span><br><span class="line">    if(![userInfo valueForKeyPath:@&quot;aps.recall&quot;])</span><br><span class="line">    &#123;</span><br><span class="line">        completionHandler(UIBackgroundFetchResultNewData);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//iOS10新增：处理前台收到通知的代理方法</span><br><span class="line">-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler&#123;</span><br><span class="line">    NSDictionary * userInfo = notification.request.content.userInfo;</span><br><span class="line">    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) &#123;</span><br><span class="line">        [UMessage setAutoAlert:NO];</span><br><span class="line">        //应用处于前台时的远程推送接受</span><br><span class="line">        //必须加这句代码</span><br><span class="line">        [UMessage didReceiveRemoteNotification:userInfo];</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //应用处于前台时的本地推送接受</span><br><span class="line">    &#125;</span><br><span class="line">    completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionAlert);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//iOS10新增：处理后台点击通知的代理方法</span><br><span class="line">-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler&#123;</span><br><span class="line">    NSDictionary * userInfo = response.notification.request.content.userInfo;</span><br><span class="line">    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) &#123;</span><br><span class="line">        //应用处于后台时的远程推送接受</span><br><span class="line">        //必须加这句代码</span><br><span class="line">        [UMessage didReceiveRemoteNotification:userInfo];</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //应用处于后台时的本地推送接受</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//************************************************UMeng Push end************************************************</span><br></pre></td></tr></table></figure>
+<p>3.在生产环境如何获取ios的devicetoken</p>
+<p>查看NSUserDefaults中的kUMessageUserDefaultKeyForDeviceToken的值</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/10/24/升级记录0-47-2到0-57-3/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Jlala's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2020/07/">七月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/10/">十月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/09/">九月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.svg);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.svg);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.svg);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Jlala
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+
+    <script src="/js/lazyload.min.js"></script>
+    <script src="/js/js.min.js"></script>
+
+
+
+    <script src="/js/nprogress.js"></script>
+
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+<script>
+    <!-- Offer LazyLoad -->
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    <!-- Start Queue -->
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
