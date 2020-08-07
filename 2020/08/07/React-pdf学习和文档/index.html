@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.4 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            React-pdf学习和文档 | 
+        
+        Jlala
+    </title>
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+    
+    
+
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Jlala">
+    <meta name="description" content="jlala-blog,nodejs,react-native,react,小小的程序员">
+    <meta name="keywords" content="null">
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Jlala">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="React-pdf学习和文档 | Jlala">
+    <meta property="og:description" content="jlala-blog,nodejs,react-native,react,小小的程序员">
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS & jQuery -->
+    
+        <link rel="stylesheet" href="/css/material.min.css">
+        <link rel="stylesheet" href="/css/style.min.css">
+        <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/queue.js"></script>
+    
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#React-Pdf-使用"><span class="post-toc-number">1.</span> <span class="post-toc-text">React-Pdf 使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-安装react和react-pdf"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.安装react和react-pdf</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-创建你的pdf文档"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2.创建你的pdf文档</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-显示你的pdf"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3.显示你的pdf</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#保存为文件"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">保存为文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#在dom中显示"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">在dom中显示</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#pdf渲染过程"><span class="post-toc-number">2.</span> <span class="post-toc-text">pdf渲染过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-内部结构创作"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1.内部结构创作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-创建pdf文档和元数据"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.创建pdf文档和元数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-fetch-资源"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3.fetch 资源</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-包装页面"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">4.包装页面</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-渲染ing"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">5.渲染ing</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-完成文档"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">6.完成文档</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#组件"><span class="post-toc-number">3.</span> <span class="post-toc-text">组件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-Document"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1.Document</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-Page"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2.Page</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-View"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.View</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-Image"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">4.Image</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-text"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">5.text</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-Link"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">6.Link</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-Note"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">7.Note</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-Canvas"><span class="post-toc-number">3.8.</span> <span class="post-toc-text">8.Canvas</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-PDFViewer-web-only"><span class="post-toc-number">3.9.</span> <span class="post-toc-text">9.PDFViewer web only</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-PDFDownloadLink-web-only"><span class="post-toc-number">3.10.</span> <span class="post-toc-text">10.PDFDownloadLink web only</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11-BlobProvider-web-only"><span class="post-toc-number">3.11.</span> <span class="post-toc-text">11.BlobProvider web only</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高级功能"><span class="post-toc-number">4.</span> <span class="post-toc-text">高级功能</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-分页属性-支持所有类型组件"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">1.分页属性-支持所有类型组件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-固定组件"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">2.固定组件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-所见即所得渲染-only-web"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">3.所见即所得渲染 -only web</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-保护文档内容"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">4.保护文档内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-动态内容"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">5.动态内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-debug和ruler"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">6.debug和ruler</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-Hyphenation"><span class="post-toc-number">4.7.</span> <span class="post-toc-text">7.Hyphenation</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-Webpack-config-webonly"><span class="post-toc-number">4.8.</span> <span class="post-toc-text">8.Webpack config webonly</span></a></li></ol></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                React-pdf学习和文档
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Jlala</strong>
+        <span>8月 07, 2020</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=React-pdf学习和文档&url=http://yoursite.com//2020/08/07/React-pdf学习和文档/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=React-pdf学习和文档&url=http://yoursite.com//2020/08/07/React-pdf学习和文档/index.html&via=Jlala" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2020/08/07/React-pdf学习和文档/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2020/08/07/React-pdf学习和文档/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="React-Pdf-使用"><a href="#React-Pdf-使用" class="headerlink" title="React-Pdf 使用"></a>React-Pdf 使用</h2><p>创建pdf文件可以在浏览器，移动端（开发中）和服务端使用，并通过react渲染。</p>
+<h3 id="1-安装react和react-pdf"><a href="#1-安装react和react-pdf" class="headerlink" title="1.安装react和react-pdf"></a>1.安装react和react-pdf</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add @react-pdf/renderer</span><br></pre></td></tr></table></figure>
+<h3 id="2-创建你的pdf文档"><a href="#2-创建你的pdf文档" class="headerlink" title="2.创建你的pdf文档"></a>2.创建你的pdf文档</h3><p>支持使用css属性和flexbox布局</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Page, Text, View, Document, StyleSheet &#125; <span class="keyword">from</span> <span class="string">'@react-pdf/renderer'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Create styles</span></span><br><span class="line"><span class="keyword">const</span> styles = StyleSheet.create(&#123;</span><br><span class="line">  page: &#123;</span><br><span class="line">    flexDirection: <span class="string">'row'</span>,</span><br><span class="line">    backgroundColor: <span class="string">'#E4E4E4'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  section: &#123;</span><br><span class="line">    margin: <span class="number">10</span>,</span><br><span class="line">    padding: <span class="number">10</span>,</span><br><span class="line">    flexGrow: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Create Document Component</span></span><br><span class="line"><span class="keyword">const</span> MyDocument = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;Document&gt;</span><br><span class="line">    &lt;Page size=<span class="string">"A4"</span> style=&#123;styles.page&#125;&gt;</span><br><span class="line">      &lt;View style=&#123;styles.section&#125;&gt;</span><br><span class="line">        &lt;Text&gt;Section #1&lt;/Text&gt;</span><br><span class="line">      &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">      &lt;View style=&#123;styles.section&#125;&gt;</span></span><br><span class="line"><span class="regexp">        &lt;Text&gt;Section #2&lt;/</span>Text&gt;</span><br><span class="line">      &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>Page&gt;</span><br><span class="line">  &lt;<span class="regexp">/Document&gt;</span></span><br><span class="line"><span class="regexp">);</span></span><br><span class="line"><span class="regexp">This will produce a</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-显示你的pdf"><a href="#3-显示你的pdf" class="headerlink" title="3.显示你的pdf"></a>3.显示你的pdf</h3><h4 id="保存为文件"><a href="#保存为文件" class="headerlink" title="保存为文件"></a>保存为文件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ReactPDF <span class="keyword">from</span> <span class="string">'@react-pdf/renderer'</span>;</span><br><span class="line"></span><br><span class="line">ReactPDF.render(&lt;MyDocument /&gt;, `$&#123;__dirname&#125;/example.pdf`);</span><br></pre></td></tr></table></figure>
+<h4 id="在dom中显示"><a href="#在dom中显示" class="headerlink" title="在dom中显示"></a>在dom中显示</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; PDFViewer &#125; <span class="keyword">from</span> <span class="string">'@react-pdf/renderer'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;PDFViewer&gt;</span><br><span class="line">    &lt;MyDocument /&gt;</span><br><span class="line">  &lt;<span class="regexp">/PDFViewer&gt;</span></span><br><span class="line"><span class="regexp">);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">ReactDOM.render(&lt;App /</span>&gt;, <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="pdf渲染过程"><a href="#pdf渲染过程" class="headerlink" title="pdf渲染过程"></a>pdf渲染过程</h2><h3 id="1-内部结构创作"><a href="#1-内部结构创作" class="headerlink" title="1.内部结构创作"></a>1.内部结构创作</h3><p>通过把react元素转换为每个文档块，并计算文档块的宽高位置和间距</p>
+<h3 id="2-创建pdf文档和元数据"><a href="#2-创建pdf文档和元数据" class="headerlink" title="2.创建pdf文档和元数据"></a>2.创建pdf文档和元数据</h3><p>用了pdfkit <a href="https://github.com/foliojs/pdfkit" target="_blank" rel="noopener">https://github.com/foliojs/pdfkit</a></p>
+<h3 id="3-fetch-资源"><a href="#3-fetch-资源" class="headerlink" title="3.fetch 资源"></a>3.fetch 资源</h3><p>异步将图片文字表情渲染到文档中</p>
+<h3 id="4-包装页面"><a href="#4-包装页面" class="headerlink" title="4.包装页面"></a>4.包装页面</h3><p>对字体和图片等进行布局和计算空间位置</p>
+<h3 id="5-渲染ing"><a href="#5-渲染ing" class="headerlink" title="5.渲染ing"></a>5.渲染ing</h3><p>递归渲染内容</p>
+<h3 id="6-完成文档"><a href="#6-完成文档" class="headerlink" title="6.完成文档"></a>6.完成文档</h3><p>可以显示一个完整的pdf我们只需要进行排版布局</p>
+<h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><h3 id="1-Document"><a href="#1-Document" class="headerlink" title="1.Document"></a>1.Document</h3><p>是树元素结构的根，只有<page>是它的子元素</page></p>
+<p>包含属性</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Propname</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">title</td>
+<td style="text-align:left">Sets title info on the document’s metadata</td>
+<td style="text-align:left"><em>String</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">author</td>
+<td style="text-align:left">Sets author info on the document’s metadata</td>
+<td style="text-align:left"><em>String</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">subject</td>
+<td style="text-align:left">Sets subject info on the document’s metadata</td>
+<td style="text-align:left"><em>String</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">keywords</td>
+<td style="text-align:left">Sets keywords associated info on the document’s metadata</td>
+<td style="text-align:left"><em>String</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">creator</td>
+<td style="text-align:left">Sets creator info on the document’s metadata</td>
+<td style="text-align:left"><em>String</em></td>
+<td style="text-align:left"><em>“react-pdf”</em></td>
+</tr>
+<tr>
+<td style="text-align:left">producer</td>
+<td style="text-align:left">Sets producer info on the document’s metadata</td>
+<td style="text-align:left"><em>String</em></td>
+<td style="text-align:left"><em>“react-pdf”</em></td>
+</tr>
+<tr>
+<td style="text-align:left">onRender</td>
+<td style="text-align:left">Callback after document renders. Receives document blob argument in web</td>
+<td style="text-align:left"><em>Function</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-Page"><a href="#2-Page" class="headerlink" title="2.Page"></a>2.Page</h3><p>表示pdf文档的单个页面，如果使用自动分页功能代表部分page，可以是任意数量</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Prop name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">size</td>
+<td style="text-align:left">Defines page size. If <em>String</em>, must be one of the <a href="https://github.com/diegomura/react-pdf/blob/master/src/utils/pageSizes.js" target="_blank" rel="noopener">available page sizes</a>. Height is optional, if ommited it will behave as “auto”.</td>
+<td style="text-align:left"><em>String</em>, <em>Array</em>, <em>Number</em>, <em>Object</em></td>
+<td style="text-align:left"><em>“A4”</em></td>
+</tr>
+<tr>
+<td style="text-align:left">orientation方向</td>
+<td style="text-align:left">Defines page orientation. <em>Valid values: “portrait” or “landscape”</em></td>
+<td style="text-align:left"><em>String</em></td>
+<td style="text-align:left"><em>“portrait”</em></td>
+</tr>
+<tr>
+<td style="text-align:left">wrap</td>
+<td style="text-align:left">Enables page wrapping for this page. <a href="https://react-pdf.org/advanced#page-wrapping" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>true</em></td>
+</tr>
+<tr>
+<td style="text-align:left">style</td>
+<td style="text-align:left">Defines page styles. <a href="https://react-pdf.org/styling" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Object</em>, <em>Array</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">debug</td>
+<td style="text-align:left">Enables debug mode on page bounding box. <a href="https://react-pdf.org/advanced#debugging" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+<tr>
+<td style="text-align:left">ruler</td>
+<td style="text-align:left">Enables vertical and horizontal rulers on page. <a href="https://react-pdf.org/advanced#ruler" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+<tr>
+<td style="text-align:left">rulerSteps</td>
+<td style="text-align:left">Grid separation for horizontal and vertical rulers <a href="https://react-pdf.org/advanced#ruler" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Integer</em> <em>Float</em> <em>String</em></td>
+<td style="text-align:left">50</td>
+</tr>
+<tr>
+<td style="text-align:left">verticalRuler</td>
+<td style="text-align:left">Enables vertical ruler on page. <a href="https://react-pdf.org/advanced#ruler" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+<tr>
+<td style="text-align:left">verticalRulerSteps</td>
+<td style="text-align:left">Grid separation for vertical ruler <a href="https://react-pdf.org/advanced#ruler" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Integer</em> <em>Float</em> <em>String</em></td>
+<td style="text-align:left">50</td>
+</tr>
+<tr>
+<td style="text-align:left">horizontalRuler</td>
+<td style="text-align:left">Enables horizontal ruler on page. <a href="https://react-pdf.org/advanced#ruler" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+<tr>
+<td style="text-align:left">horizontalRulerSteps</td>
+<td style="text-align:left">Grid separation for horizontal rulers <a href="https://react-pdf.org/advanced#ruler" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Integer</em> <em>Float</em> <em>String</em></td>
+<td style="text-align:left">50</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-View"><a href="#3-View" class="headerlink" title="3.View"></a>3.View</h3><p>构建ui的基本组件，有0到多个</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Prop name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">wrap</td>
+<td style="text-align:left">Enable/disable page wrapping for element <a href="https://react-pdf.org/advanced#page-wrapping" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>true</em></td>
+</tr>
+<tr>
+<td style="text-align:left">style</td>
+<td style="text-align:left">Defines view styles. <a href="https://react-pdf.org/styling" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Object</em>, <em>Array</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">render</td>
+<td style="text-align:left">Render dynamic content based on context <a href="https://react-pdf.org/advanced#dynamic-content" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Function</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">debug</td>
+<td style="text-align:left">Enables debug mode on view bounding box. <a href="https://react-pdf.org/advanced#debugging" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+<tr>
+<td style="text-align:left">fixed</td>
+<td style="text-align:left">Render component in all wrapped pages. <a href="https://react-pdf.org/advanced#page-wrapping" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-Image"><a href="#4-Image" class="headerlink" title="4.Image"></a>4.Image</h3><p>显示网络或者本地节点的图片 包括jpg和png图片以及base64位图片</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Prop name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">src</td>
+<td style="text-align:left">Source of the image <a href="https://react-pdf.org/components#source-object" target="_blank" rel="noopener">See Source object</a></td>
+<td style="text-align:left"><em>Source object</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">source</td>
+<td style="text-align:left">Alias of <em>src</em> <a href="https://react-pdf.org/components#source-object" target="_blank" rel="noopener">See Source object</a></td>
+<td style="text-align:left"><em>Source object</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">style</td>
+<td style="text-align:left">Defines view styles. <a href="https://react-pdf.org/styling" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Object</em>, <em>Array</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">debug</td>
+<td style="text-align:left">Enables debug mode on view bounding box. <a href="https://react-pdf.org/advanced#debugging" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+<tr>
+<td style="text-align:left">fixed</td>
+<td style="text-align:left">Renders component in all wrapped pages. <a href="https://react-pdf.org/advanced#page-wrapping" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+<tr>
+<td style="text-align:left">cache</td>
+<td style="text-align:left">Enables image caching between consecutive renders</td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>true</em></td>
+</tr>
+<tr>
+<td style="text-align:left">safePath</td>
+<td style="text-align:left">The safe path from which local images (Node only) can be rendered</td>
+<td style="text-align:left"><em>String</em></td>
+<td style="text-align:left"><em>./public</em></td>
+</tr>
+<tr>
+<td style="text-align:left">allowDangerousPaths <code>Node only</code></td>
+<td style="text-align:left">Allows local images to be retrieved from paths outside the <em>safePath</em>. <em>Use this at your own risk!</em></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+</tbody>
+</table>
+<p>1）source object</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Form type</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">Valid image URL or filesystem path (Node only)</td>
+<td style="text-align:left"><code>www.react-pdf.org/test.jpg</code></td>
+</tr>
+<tr>
+<td style="text-align:left">URL object</td>
+<td style="text-align:left">Enables to pass extra parameters on how to fetch images</td>
+<td style="text-align:left"><code>{ uri: valid-url, method: &#39;GET&#39;, headers: {}, body: &#39;&#39; }</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Data buffer</td>
+<td style="text-align:left">Renders buffer image via the <em>data</em> key. It’s also recommended to provide the image <em>format</em> so the engine knows how to proccess it</td>
+<td style="text-align:left">`{ data: Buffer, format: ‘png’</td>
+<td>‘jpg’ }`</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-text"><a href="#5-text" class="headerlink" title="5.text"></a>5.text</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">Prop name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">wrap</td>
+<td style="text-align:left">Enables/disables page wrapping for element <a href="https://react-pdf.org/advanced#page-wrapping" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>true</em></td>
+</tr>
+<tr>
+<td style="text-align:left">render</td>
+<td style="text-align:left">Renders dynamic content based on context <a href="https://react-pdf.org/advanced#dynamic-content" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Function</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">style</td>
+<td style="text-align:left">Defines view styles. <a href="https://react-pdf.org/styling" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Object</em>, <em>Array</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">debug</td>
+<td style="text-align:left">Enables debug mode on view bounding box. <a href="https://react-pdf.org/advanced#debugging" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+<tr>
+<td style="text-align:left">fixed</td>
+<td style="text-align:left">Renders component in all wrapped pages. <a href="https://react-pdf.org/advanced#page-wrapping" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+<tr>
+<td style="text-align:left">hyphenationCallback</td>
+<td style="text-align:left">Specifies how much hyphenated breaks should be avoided</td>
+<td style="text-align:left"><em>Integer</em></td>
+<td style="text-align:left"><em>600</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-Link"><a href="#6-Link" class="headerlink" title="6.Link"></a>6.Link</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">Prop name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">src</td>
+<td style="text-align:left">Valid URL</td>
+<td style="text-align:left"><em>String</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">wrap</td>
+<td style="text-align:left">Enable/disable page wrapping for element <a href="https://react-pdf.org/advanced#page-wrapping" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>true</em></td>
+</tr>
+<tr>
+<td style="text-align:left">style</td>
+<td style="text-align:left">Defines view styles. <a href="https://react-pdf.org/styling" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Object</em>, <em>Array</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">debug</td>
+<td style="text-align:left">Enables debug mode on view bounding box. <a href="https://react-pdf.org/advanced#debugging" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+<tr>
+<td style="text-align:left">fixed</td>
+<td style="text-align:left">Render component in all wrapped pages. <a href="https://react-pdf.org/advanced#page-wrapping" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-Note"><a href="#7-Note" class="headerlink" title="7.Note"></a>7.Note</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">Prop name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">style</td>
+<td style="text-align:left">Defines view styles. <a href="https://react-pdf.org/styling" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Object</em>, <em>Array</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">children</td>
+<td style="text-align:left">Note string content</td>
+<td style="text-align:left"><em>String</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">fixed</td>
+<td style="text-align:left">Renders component in all wrapped pages. <a href="https://react-pdf.org/advanced#page-wrapping" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="8-Canvas"><a href="#8-Canvas" class="headerlink" title="8.Canvas"></a>8.Canvas</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">Prop name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">style</td>
+<td style="text-align:left">Defines view styles. <a href="https://react-pdf.org/styling" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Object</em>, <em>Array</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">paint</td>
+<td style="text-align:left">Painter function</td>
+<td style="text-align:left"><em>Function</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">debug</td>
+<td style="text-align:left">Enables debug mode on view bounding box. <a href="https://react-pdf.org/advanced#debugging" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+<tr>
+<td style="text-align:left">fixed</td>
+<td style="text-align:left">Renders component in all wrapped pages. <a href="https://react-pdf.org/advanced#page-wrapping" target="_blank" rel="noopener">See more</a></td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="9-PDFViewer-web-only"><a href="#9-PDFViewer-web-only" class="headerlink" title="9.PDFViewer web only"></a>9.PDFViewer web only</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">Prop name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">style</td>
+<td style="text-align:left">Defines iframe styles</td>
+<td style="text-align:left"><em>Object</em>, <em>Array</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">className</td>
+<td style="text-align:left">Defines iframe class name</td>
+<td style="text-align:left"><em>String</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">children</td>
+<td style="text-align:left">PDF document implementation</td>
+<td style="text-align:left"><em>Document</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">width</td>
+<td style="text-align:left">Width of embedded PDF iframe</td>
+<td style="text-align:left"><em>String</em>, <em>Number</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">height</td>
+<td style="text-align:left">Height of embedded PDF iframe</td>
+<td style="text-align:left"><em>String</em>, <em>Number</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="10-PDFDownloadLink-web-only"><a href="#10-PDFDownloadLink-web-only" class="headerlink" title="10.PDFDownloadLink web only"></a>10.PDFDownloadLink web only</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">Prop name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">document</td>
+<td style="text-align:left">PDF document implementation</td>
+<td style="text-align:left"><em>Document</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">fileName</td>
+<td style="text-align:left">Download PDF file name</td>
+<td style="text-align:left"><em>String</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">style</td>
+<td style="text-align:left">Defines anchor tag styles</td>
+<td style="text-align:left"><em>Object</em>, <em>Array</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">className</td>
+<td style="text-align:left">Defines anchor tag class name</td>
+<td style="text-align:left"><em>String</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">children</td>
+<td style="text-align:left">Anchor tag content</td>
+<td style="text-align:left"><em>DOM node</em>, <em>Function</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="11-BlobProvider-web-only"><a href="#11-BlobProvider-web-only" class="headerlink" title="11.BlobProvider web only"></a>11.BlobProvider web only</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">Prop name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">document</td>
+<td style="text-align:left">PDF document implementation</td>
+<td style="text-align:left"><em>Document</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+<tr>
+<td style="text-align:left">children</td>
+<td style="text-align:left">Render prop with blob, url, error and loading state as arguments</td>
+<td style="text-align:left"><em>Function</em></td>
+<td style="text-align:left"><em>undefined</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="高级功能"><a href="#高级功能" class="headerlink" title="高级功能"></a>高级功能</h2><h3 id="1-分页属性-支持所有类型组件"><a href="#1-分页属性-支持所有类型组件" class="headerlink" title="1.分页属性-支持所有类型组件"></a>1.分页属性-支持所有类型组件</h3><p>通过break属性，强制该组件在新页面中显示</p>
+<h3 id="2-固定组件"><a href="#2-固定组件" class="headerlink" title="2.固定组件"></a>2.固定组件</h3><p>通过fixed属性，设置固定组件，可以创建页眉页脚页码，甚至是绝对定位组件</p>
+<h3 id="3-所见即所得渲染-only-web"><a href="#3-所见即所得渲染-only-web" class="headerlink" title="3.所见即所得渲染 -only web"></a>3.所见即所得渲染 -only web</h3><p>下载pdf文档组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; PDFDownloadLink, Document, Page &#125; <span class="keyword">from</span> <span class="string">'@react-pdf/renderer'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> MyDoc = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;Document&gt;</span><br><span class="line">    &lt;Page&gt;</span><br><span class="line">      <span class="comment">// My document data</span></span><br><span class="line">    &lt;<span class="regexp">/Page&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>Document&gt;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;PDFDownloadLink <span class="built_in">document</span>=&#123;&lt;MyDoc /&gt;&#125; fileName=<span class="string">"somename.pdf"</span>&gt;</span><br><span class="line">      &#123;(&#123; blob, url, loading, error &#125;) =&gt; (loading ? <span class="string">'Loading document...'</span> : <span class="string">'Download now!'</span>)&#125;</span><br><span class="line">    &lt;<span class="regexp">/PDFDownloadLink&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>访问 blob 数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; BlobProvider, Document, Page &#125; <span class="keyword">from</span> <span class="string">'@react-pdf/renderer'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> MyDoc = (</span><br><span class="line">  &lt;Document&gt;</span><br><span class="line">    &lt;Page&gt;</span><br><span class="line">      <span class="comment">// My document data</span></span><br><span class="line">    &lt;<span class="regexp">/Page&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>Document&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;BlobProvider <span class="built_in">document</span>=&#123;MyDoc&#125;&gt;</span><br><span class="line">      &#123;(&#123; blob, url, loading, error &#125;) =&gt; &#123;</span><br><span class="line">        <span class="comment">// Do whatever you need with blob here</span></span><br><span class="line">        <span class="keyword">return</span> &lt;div&gt;There's something going on on the fly&lt;/div&gt;</span><br><span class="line">      &#125;&#125;</span><br><span class="line">    &lt;<span class="regexp">/BlobProvider&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="4-保护文档内容"><a href="#4-保护文档内容" class="headerlink" title="4.保护文档内容"></a>4.保护文档内容</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">Prop name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">minPresenceAhead</td>
+<td style="text-align:left">Hint that no page wrapping should occur between all sibling elements following the element within <em>n</em> points</td>
+<td style="text-align:left"><em>Integer</em></td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">orphans <em>(text only)</em></td>
+<td style="text-align:left">Specifies the minimum number of lines in a text element that must be shown at the bottom of a page or its container.</td>
+<td style="text-align:left"><em>Integer</em></td>
+<td style="text-align:left">2</td>
+</tr>
+<tr>
+<td style="text-align:left">widows <em>(text only)</em></td>
+<td style="text-align:left">Specifies the minimum number of lines in a text element that must be shown at the top of a page or its container.</td>
+<td style="text-align:left"><em>Integer</em></td>
+<td style="text-align:left">2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-动态内容"><a href="#5-动态内容" class="headerlink" title="5.动态内容"></a>5.动态内容</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Document, Page &#125; <span class="keyword">from</span> <span class="string">'@react-pdf/renderer'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> doc = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;Document&gt;</span><br><span class="line">    &lt;Page wrap&gt;</span><br><span class="line">      &lt;Text render=&#123;(&#123; pageNumber, totalPages &#125;) =&gt; (</span><br><span class="line">        <span class="string">`<span class="subst">$&#123;pageNumber&#125;</span> / <span class="subst">$&#123;totalPages&#125;</span>`</span></span><br><span class="line">      )&#125; fixed /&gt;</span><br><span class="line"></span><br><span class="line">      &lt;View render=&#123;(&#123; pageNumber &#125;) =&gt; (</span><br><span class="line">        pageNumber % <span class="number">2</span> === <span class="number">0</span> &amp;&amp; (</span><br><span class="line">          &lt;View style=&#123;&#123; <span class="attr">background</span>: <span class="string">'red'</span> &#125;&#125;&gt;</span><br><span class="line">            &lt;Text&gt;I<span class="string">'m only visible in odd pages!&lt;/Text&gt;</span></span><br><span class="line"><span class="string">          &lt;/View&gt;</span></span><br><span class="line"><span class="string">        )</span></span><br><span class="line"><span class="string">      )&#125; /&gt;</span></span><br><span class="line"><span class="string">    &lt;/Page&gt;</span></span><br><span class="line"><span class="string">  &lt;/Document&gt;</span></span><br><span class="line"><span class="string">);</span></span><br></pre></td></tr></table></figure>
+<p>可以参数</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">pageNumber</td>
+<td style="text-align:left">Current page number</td>
+<td style="text-align:left"><em>Integer</em></td>
+</tr>
+<tr>
+<td style="text-align:left">totalPages <code>Text only</code></td>
+<td style="text-align:left">Total amount of pages in the final document</td>
+<td style="text-align:left"><em>Integer</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-debug和ruler"><a href="#6-debug和ruler" class="headerlink" title="6.debug和ruler"></a>6.debug和ruler</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">Prop name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">ruler</td>
+<td style="text-align:left">Enables vertical and horizontal rulers on page.</td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+<tr>
+<td style="text-align:left">rulerSteps</td>
+<td style="text-align:left">Grid separation for horizontal and vertical rulers</td>
+<td style="text-align:left"><em>Integer</em>, <em>Float</em>, <em>String</em></td>
+<td style="text-align:left">50</td>
+</tr>
+<tr>
+<td style="text-align:left">verticalRuler</td>
+<td style="text-align:left">Enables vertical ruler on page.</td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+<tr>
+<td style="text-align:left">verticalRulerSteps</td>
+<td style="text-align:left">Grid separation for vertical ruler</td>
+<td style="text-align:left"><em>Integer</em>, <em>Float</em>, <em>String</em></td>
+<td style="text-align:left">50</td>
+</tr>
+<tr>
+<td style="text-align:left">horizontalRuler</td>
+<td style="text-align:left">Enables horizontal ruler on page.</td>
+<td style="text-align:left"><em>Boolean</em></td>
+<td style="text-align:left"><em>false</em></td>
+</tr>
+<tr>
+<td style="text-align:left">horizontalRulerSteps</td>
+<td style="text-align:left">Grid separation for horizontal rulers</td>
+<td style="text-align:left"><em>Integer</em>, <em>Float</em>, <em>String</em></td>
+<td style="text-align:left">50</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-Hyphenation"><a href="#7-Hyphenation" class="headerlink" title="7.Hyphenation"></a>7.Hyphenation</h3><p>如果需要自定义断句使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Font &#125; <span class="keyword">from</span> <span class="string">'@react-pdf/renderer'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hyphenationCallback = <span class="function">(<span class="params">word</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// Return word syllables in an array</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Font.registerHyphenationCallback(hyphenationCallback);</span><br></pre></td></tr></table></figure>
+<h3 id="8-Webpack-config-webonly"><a href="#8-Webpack-config-webonly" class="headerlink" title="8.Webpack config webonly"></a>8.Webpack config webonly</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  ...</span><br><span class="line">  node : &#123;</span><br><span class="line">    <span class="built_in">module</span>: <span class="string">'empty'</span>,</span><br><span class="line">    dgram: <span class="string">'empty'</span>,</span><br><span class="line">    dns: <span class="string">'mock'</span>,</span><br><span class="line">    fs: <span class="string">'empty'</span>,</span><br><span class="line">    http2: <span class="string">'empty'</span>,</span><br><span class="line">    net: <span class="string">'empty'</span>,</span><br><span class="line">    tls: <span class="string">'empty'</span>,</span><br><span class="line">    child_process: <span class="string">'empty'</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2020/07/23/react-native集成友盟推送/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Jlala's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2020/08/">八月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/07/">七月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/10/">十月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/09/">九月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.svg);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.svg);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.svg);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Jlala
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+
+    <script src="/js/lazyload.min.js"></script>
+    <script src="/js/js.min.js"></script>
+
+
+
+    <script src="/js/nprogress.js"></script>
+
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+<script>
+    <!-- Offer LazyLoad -->
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    <!-- Start Queue -->
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
